@@ -1,5 +1,7 @@
-import { sortIp, countClientsStatistics, findAddressType } from '../helpers/helpers';
-import { ADDRESS_TYPES } from '../helpers/constants';
+import {
+    sortIp, countClientsStatistics, findAddressType, formatDateTimeInner,
+} from '../helpers/helpers';
+import { ADDRESS_TYPES, DEFAULT_DATE_FORMAT_OPTIONS } from '../helpers/constants';
 
 describe('sortIp', () => {
     describe('ipv4', () => {
@@ -404,5 +406,27 @@ describe('countClientsStatistics', () => {
             '2.2.2.2': 2,
             '3.3.3.3': 3,
         })).toStrictEqual(0);
+    });
+});
+
+describe('formatDateTimeInner', () => {
+    describe('locales', () => {
+        test('en', () => {
+            expect(formatDateTimeInner('2020-09-28T00:43:27.344163+00:00', DEFAULT_DATE_FORMAT_OPTIONS, 'en')).toStrictEqual('9/28/2020, 03:43');
+        });
+        test('en-US', () => {
+            expect(formatDateTimeInner('2020-09-28T00:43:27.344163+00:00', DEFAULT_DATE_FORMAT_OPTIONS, 'en-US')).toStrictEqual('9/28/2020, 03:43');
+        });
+        test('en-GB', () => {
+            expect(formatDateTimeInner('2020-09-28T00:43:27.344163+00:00', DEFAULT_DATE_FORMAT_OPTIONS, 'en-GB')).toStrictEqual('28/09/2020, 03:43');
+        });
+        test('undefined', () => {
+            expect(formatDateTimeInner('2020-09-28T00:43:27.344163+00:00', DEFAULT_DATE_FORMAT_OPTIONS, undefined)).toStrictEqual('9/28/2020, 03:43');
+        });
+        // toLocaleString() without arguments depends on the
+        // implementation, the default locale, and the default time zone
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString
+        // Google Chrome 85, Safari 13.1 - '28.09.2020, 03:43'
+        // Firefox 81 - '9/28/2020, 3:43:27 AM'
     });
 });

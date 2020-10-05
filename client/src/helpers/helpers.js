@@ -42,14 +42,27 @@ export const formatTime = (time, options = DEFAULT_TIME_FORMAT) => {
 };
 
 /**
+ * function to test undefined locales argument
  * @param dateTime {string} The date to format
- * @param [options] {object} Date.prototype.toLocaleString([locales[, options]]) options argument
+ * @param options {object} Date.prototype.toLocaleString([locales[, options]]) options argument
+ * @param locales {string} Date.prototype.toLocaleString([locales[, options]]) locales argument
  * @returns {string} Returns the date and time in the specified format
  */
-export const formatDateTime = (dateTime, options = DEFAULT_DATE_FORMAT_OPTIONS) => {
+export const formatDateTimeInner = (dateTime, options, locales) => {
     const parsedTime = new Date(dateTime);
-    return parsedTime.toLocaleString(navigator.language, options);
+    return parsedTime.toLocaleString(locales, options);
 };
+
+/**
+ * formatDateTimeInner delegate
+ * @param dateTime {string} The date to format
+ * @param [options] {object} Date.prototype.toLocaleString([locales[, options]]) options argument
+ * @param [locales] {string} Date.prototype.toLocaleString([locales[, options]]) locales argument
+ * @returns {string} Returns the date and time in the specified format
+ */
+export const formatDateTime = (
+    dateTime, options = DEFAULT_DATE_FORMAT_OPTIONS, locales = navigator.language,
+) => formatDateTimeInner(dateTime, options, locales);
 
 /**
  * @param dateTime {string} The date to format
