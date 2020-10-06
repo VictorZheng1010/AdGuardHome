@@ -41,27 +41,23 @@ func genUUIDv4() string {
 }
 
 func getMobileConfig(w http.ResponseWriter, r *http.Request, d DNSSettings) []byte {
-	PayloadContentUUID := genUUIDv4()
-	PayloadIdentifier := genUUIDv4()
-	PayloadUUID := genUUIDv4()
-
 	data := MobileConfig{
 		PayloadContent: []PayloadContent{{
 			Name:               fmt.Sprintf("%s DNS over %s", r.Host, d.DNSProtocol),
 			PayloadDescription: "Configures device to use AdGuard Home",
 			PayloadDisplayName: "AdGuard Home",
-			PayloadIdentifier:  fmt.Sprintf("com.apple.dnsSettings.managed.%s", PayloadContentUUID),
+			PayloadIdentifier:  fmt.Sprintf("com.apple.dnsSettings.managed.%s", genUUIDv4()),
 			PayloadType:        "com.apple.dnsSettings.managed",
-			PayloadUUID:        PayloadContentUUID,
+			PayloadUUID:        genUUIDv4(),
 			PayloadVersion:     1,
 			DNSSettings:        d,
 		}},
 		PayloadDescription:       "Adds AdGuard Home to Big Sur and iOS 14 or newer systems",
 		PayloadDisplayName:       "AdGuard Home",
-		PayloadIdentifier:        PayloadIdentifier,
+		PayloadIdentifier:        genUUIDv4(),
 		PayloadRemovalDisallowed: false,
 		PayloadType:              "Configuration",
-		PayloadUUID:              PayloadUUID,
+		PayloadUUID:              genUUIDv4(),
 		PayloadVersion:           1,
 	}
 
@@ -84,7 +80,7 @@ func handleMobileConfig(w http.ResponseWriter, r *http.Request, d DNSSettings) {
 func handleMobileConfigDoh(w http.ResponseWriter, r *http.Request) {
 	handleMobileConfig(w, r, DNSSettings{
 		DNSProtocol: "HTTPS",
-		ServerURL:   fmt.Sprintf("https://%s", r.Host),
+		ServerURL:   fmt.Sprintf("https://%s/dns-query", r.Host),
 	})
 }
 
