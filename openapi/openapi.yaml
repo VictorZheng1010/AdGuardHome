@@ -922,22 +922,22 @@ paths:
             tags:
                 - mobileconfig
                 - global
-            operationId: DoHMobileconfig
+            operationId: mobileConfigDoH
             summary: Get DNS over HTTPS .mobileconfig
             responses:
                 "200":
-                    description: dot.mobileconfig
+                    description: DNS over HTTPS plist file
 
     /apple/dot.mobileconfig:
         get:
             tags:
                 - mobileconfig
                 - global
-            operationId: DoTMobileconfig
+            operationId: mobileConfigDoT
             summary: Get TLS over TLS .mobileconfig
             responses:
                 "200":
-                    description: doh.mobileconfig
+                    description: DNS over TLS plist file
 
 components:
     requestBodies:

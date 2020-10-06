@@ -40,12 +40,14 @@ func genUUIDv4() string {
 	return uuid.NewV4().String()
 }
 
-func getMobileConfig(w http.ResponseWriter, r *http.Request, d DNSSettings) []byte {
+func getMobileConfig(r *http.Request, d DNSSettings) ([]byte, error) {
+	name := fmt.Sprintf("%s DNS over %s", r.Host, d.DNSProtocol)
+
 	data := MobileConfig{
 		PayloadContent: []PayloadContent{{
-			Name:               fmt.Sprintf("%s DNS over %s", r.Host, d.DNSProtocol),
+			Name:               name,
 			PayloadDescription: "Configures device to use AdGuard Home",
-			PayloadDisplayName: "AdGuard Home",
+			PayloadDisplayName: name,
 			PayloadIdentifier:  fmt.Sprintf("com.apple.dnsSettings.managed.%s", genUUIDv4()),
 			PayloadType:        "com.apple.dnsSettings.managed",
 			PayloadUUID:        genUUIDv4(),
@@ -53,7 +55,7 @@ func getMobileConfig(w http.ResponseWriter, r *http.Request, d DNSSettings) []by
 			DNSSettings:        d,
 		}},
 		PayloadDescription:       "Adds AdGuard Home to Big Sur and iOS 14 or newer systems",
-		PayloadDisplayName:       "AdGuard Home",
+		PayloadDisplayName:       name,
 		PayloadIdentifier:        genUUIDv4(),
 		PayloadRemovalDisallowed: false,
 		PayloadType:              "Configuration",
@@ -61,20 +63,18 @@ func getMobileConfig(w http.ResponseWriter, r *http.Request, d DNSSettings) []by
 		PayloadVersion:           1,
 	}
 
-	mobileconfig, err := plist.MarshalIndent(data, plist.XMLFormat, "\t")
+	return plist.MarshalIndent(data, plist.XMLFormat, "\t")
+}
+
+func handleMobileConfig(w http.ResponseWriter, r *http.Request, d DNSSettings) {
+	mobileconfig, err := getMobileConfig(r, d)
 
 	if err != nil {
 		httpError(w, http.StatusInternalServerError, "plist.MarshalIndent: %s", err)
 	}
 
-	return mobileconfig
-}
-
-func handleMobileConfig(w http.ResponseWriter, r *http.Request, d DNSSettings) {
-	mobileconfig := getMobileConfig(w, r, d)
-
 	w.Header().Set("Content-Type", "application/xml")
-	w.Write(mobileconfig)
+	_, _ = w.Write(mobileconfig)
 }
 
 func handleMobileConfigDoh(w http.ResponseWriter, r *http.Request) {

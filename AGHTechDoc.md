@@ -1988,52 +1988,7 @@ Response:
 
 	200 OK
 	
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-    <plist version="1.0">
-        <dict>
-            <key>PayloadContent</key>
-            <array>
-                 <dict>
-                    <key>DNSSettings</key>
-                    <dict>
-                        <key>DNSProtocol</key>
-                        <string>HTTPS</string>
-                        <key>ServerURL</key>
-                        <string>https://exmaple.com</string>
-                    </dict>
-                    <key>Name</key>
-                    <string>exmaple.com DNS over HTTPS</string>
-                    <key>PayloadDescription</key>
-                    <string>Configures device to use AdGuard Home</string>
-                    <key>PayloadDisplayName</key>
-                    <string>AdGuard Home</string>
-                    <key>PayloadIdentifier</key>
-                    <string>com.apple.dnsSettings.managed.b53e1681-be7c-4c23-b350-6610545e884c</string>
-                    <key>PayloadType</key>
-                    <string>com.apple.dnsSettings.managed</string>
-                    <key>PayloadUUID</key>
-                    <string>b53e1681-be7c-4c23-b350-6610545e884c</string>
-                    <key>PayloadVersion</key>
-                    <integer>1</integer>
-                  </dict>
-            </array>
-            <key>PayloadDescription</key>
-            <string>Adds AdGuard Home to Big Sur and iOS 14 or newer systems</string>
-            <key>PayloadDisplayName</key>
-            <string>AdGuard Home</string>
-            <key>PayloadIdentifier</key>
-            <string>9e2f3aff-b255-4179-bc16-caeca10396d1</string>
-            <key>PayloadRemovalDisallowed</key>
-            <false/>
-            <key>PayloadType</key>
-            <string>Configuration</string>
-            <key>PayloadUUID</key>
-            <string>b67ecfe3-e8e4-46d6-8cd8-400dbf74b501</string>
-            <key>PayloadVersion</key>
-            <integer>1</integer>
-        </dict>
-    </plist>
+    DOH plist file
 
 ## API: Get DNS over TLS .mobileconfig
 
@@ -2045,52 +2000,7 @@ Response:
 
 	200 OK
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-    <plist version="1.0">
-        <dict>
-            <key>PayloadContent</key>
-            <array>
-                 <dict>
-                    <key>DNSSettings</key>
-                    <dict>
-                        <key>DNSProtocol</key>
-                        <string>TLS</string>
-                        <key>ServerName</key>
-                        <string>exmaple.com</string>
-                    </dict>
-                    <key>Name</key>
-                    <string>exmaple.com DNS over TLS</string>
-                    <key>PayloadDescription</key>
-                    <string>Configures device to use AdGuard Home</string>
-                    <key>PayloadDisplayName</key>
-                    <string>AdGuard Home</string>
-                    <key>PayloadIdentifier</key>
-                    <string>com.apple.dnsSettings.managed.70b41a0b-316d-4c4a-83c0-ef73b9ece4f6</string>
-                    <key>PayloadType</key>
-                    <string>com.apple.dnsSettings.managed</string>
-                    <key>PayloadUUID</key>
-                    <string>70b41a0b-316d-4c4a-83c0-ef73b9ece4f6</string>
-                    <key>PayloadVersion</key>
-                    <integer>1</integer>
-                  </dict>
-            </array>
-            <key>PayloadDescription</key>
-            <string>Adds AdGuard Home to Big Sur and iOS 14 or newer systems</string>
-            <key>PayloadDisplayName</key>
-            <string>AdGuard Home</string>
-            <key>PayloadIdentifier</key>
-            <string>629466b3-b787-4645-9eb6-34382980398f</string>
-            <key>PayloadRemovalDisallowed</key>
-            <false/>
-            <key>PayloadType</key>
-            <string>Configuration</string>
-            <key>PayloadUUID</key>
-            <string>7fa3f167-e0da-4e45-9463-d07db8af3657</string>
-            <key>PayloadVersion</key>
-            <integer>1</integer>
-        </dict>
-    </plist>
+    DOT plist file
 
 ## ipset
 
